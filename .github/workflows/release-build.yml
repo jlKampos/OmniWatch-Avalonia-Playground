@@ -47,6 +47,7 @@ jobs:
         if: matrix.rid == 'win-x64'
         shell: pwsh
         run: |
+          # Decode certificate
           Set-Content -Path cert_base64.txt -Value "${{ secrets.WINDOWS_CERTIFICATE }}"
           certutil -decode cert_base64.txt windows_cert.pfx
 
@@ -60,7 +61,7 @@ jobs:
 
           $files = Get-ChildItem -Recurse publish/win-x64 -Include *.exe,*.dll
           foreach ($f in $files) {
-            & $signtool.FullName sign /f windows_cert.pfx /p $password /tr http://timestamp.digicert.com /td sha256 /fd sha256 $f.FullName
+            signtool sign /f windows_cert.pfx /p $password /tr http://timestamp.digicert.com /td sha256 /fd sha256 $f.FullName
           }
 
           Remove-Item windows_cert.pfx, cert_base64.txt

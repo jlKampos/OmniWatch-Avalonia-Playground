@@ -244,12 +244,13 @@ namespace OmniWatch.ViewModels
                 feature.Styles.Add(new LabelStyle
                 {
                     Text = infoText,
-                    ForeColor = Color.Black,
-                    BackColor = new Brush(Color.FromArgb(220, 255, 255, 255)),
-                    Font = new Font { Size = 11 },
+                    ForeColor = Color.FromArgb(255, 25, 16, 0),
+                    BorderColor = Color.FromArgb(255, 60, 100, 0),
+                    BackColor = new Brush(Color.FromArgb(191, 143, 170, 0)),
+                    Font = new Font { Size = 12, Bold = true },
                     HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
                     VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
-                    Offset = new Offset(20, 0),
+                    Offset = new Offset(25, 0),
                     CollisionDetection = true,
                 });
 
@@ -259,7 +260,7 @@ namespace OmniWatch.ViewModels
             var oldLayer = Map.Layers.FirstOrDefault(l => l.Name == "Earthquakes");
             if (oldLayer != null) Map.Layers.Remove(oldLayer);
 
-            Map.Layers.Add(new MemoryLayer { Name = "Earthquakes", Features = features });
+            Map.Layers.Add(new MemoryLayer { Name = "Earthquakes", Features = features, Style = null });
             Map.RefreshGraphics();
         }
 

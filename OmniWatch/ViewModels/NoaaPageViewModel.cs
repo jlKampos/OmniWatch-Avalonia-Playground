@@ -311,6 +311,8 @@ namespace OmniWatch.ViewModels
             }
 
             activeLayer.Features = features;
+
+            activeLayer.Style = null;
             map.Layers.Add(activeLayer);
 
             _activeStormsRotationTimer?.Stop();
@@ -446,6 +448,7 @@ namespace OmniWatch.ViewModels
                 };
 
                 _stormHeadLayer.Features = new List<IFeature> { stormFeature };
+                _stormHeadLayer.Style = null;
                 map.RefreshGraphics();
             };
 
